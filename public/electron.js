@@ -1,15 +1,16 @@
-const electron = require('electron');
-const isDev = require('electron-is-dev');
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import isDev from 'electron-is-dev';
 
-const path = require('path');
-
-const { app } = electron;
-const { BrowserWindow } = electron;
-
+console.log('start electron');
 let mainWindow;
-
+console.log(`${__dirname}/preload.js`);
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: 852,
+    height: 480,
+    webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
+  });
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
   );
