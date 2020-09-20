@@ -2,11 +2,11 @@ import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
 
-console.log('start electron');
 let mainWindow;
-console.log(`${__dirname}/preload.js`);
+
 function createWindow() {
   mainWindow = new BrowserWindow({
+    icon: `${__dirname}/favicon.ico`,
     width: 852,
     height: 480,
     webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
