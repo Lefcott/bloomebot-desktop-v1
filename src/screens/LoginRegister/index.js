@@ -4,10 +4,7 @@ import { clicksOn, clicksOff } from 'hotkeys';
 
 import useStyles from './style';
 
-setTimeout(() => {
-  console.log('call clicks on');
-  clicksOn();
-}, 5000);
+clicksOn();
 
 export default function LoginRegister() {
   const classes = useStyles();
