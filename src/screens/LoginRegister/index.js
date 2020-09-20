@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper, DialogTitle } from '@material-ui/core';
-import { clicksOn, clicksOff } from 'hotkeys';
+import { clicksOn } from 'hotkeys';
 
 import useStyles from './style';
 

@@ -2,8 +2,8 @@ import robotjs from 'robotjs';
 
 import iohook from 'iohook';
 
-iohook.on('mouseclick', event => {
-  console.log(`#${robotjs.getPixelColor(event.x, event.y).toUpperCase()}`);
+iohook.on('mouseclick', ({ x, y }) => {
+  console.log(`#${robotjs.getPixelColor(x, y).toUpperCase()}`);
 });
 
 iohook.start();
