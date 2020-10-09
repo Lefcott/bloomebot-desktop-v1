@@ -10,7 +10,9 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
+    "@lefcott/filter-json": "^1.8.1",
     "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -26,7 +28,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
-    "robotjs": "^0.6.0"
+    "robotjs": "^0.6.0",
+    "rollbar": "^2.19.3",
+    "uuidv4": "^6.2.4"
   },
   "iohook": {
     "targets": [
@@ -49,7 +53,9 @@
     "eject": "react-scripts eject",
     "electron": "electron -r @babel/register .",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
-    "dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron -r @babel/register .\""
+    "set-node-version": "scripts/set_node_version.sh",
+    "dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron -r @babel/register .\"",
+    "babel-node": "babel-node"
   },
   "eslintConfig": {
     "extends": "react-app"

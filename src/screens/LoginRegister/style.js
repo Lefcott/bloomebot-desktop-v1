@@ -6,7 +6,8 @@ export default makeStyles({
   root: {
     background: `url('${background}')`,
     width: '100%',
-    height: '100%'
+    height: '100%',
+    overflowY: 'auto'
   },
   pageTitle: {
     margin: '0 0 0 7px',

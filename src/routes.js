@@ -7,6 +7,7 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
+        <Route path="/dashboard">hola</Route>
         <Route path="/">
           <LoginRegister />
         </Route>
