@@ -3,7 +3,6 @@ import Password from './password';
 import Name from './name';
 
 const Validate = schema => value => {
-  console.log('validate', value);
   const result = schema.validate(value);
   return { valid: !result.error, value: result.value };
 };

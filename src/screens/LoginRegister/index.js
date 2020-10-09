@@ -20,7 +20,6 @@ export default function LoginRegister() {
 
   useEffect(() => {
     getCurrentUser().then(response => {
-      console.log('response.body.redirectTo', response.body.redirectTo);
       if (response && response.status === 200) return (window.location.href = response.body.redirectTo);
       setLoading(false);
     });
