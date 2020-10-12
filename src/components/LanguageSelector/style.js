@@ -7,8 +7,8 @@ export default makeStyles({
   },
   formControl: {},
   select: {
-    margin: 10,
-    padding: 5,
+    margin: 8,
+    padding: 2,
     textAlign: 'center'
   }
 });

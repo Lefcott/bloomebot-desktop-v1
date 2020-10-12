@@ -5,8 +5,12 @@ export default makeStyles({
     width: 230,
     height: '90%',
     backgroundColor: 'rgba(0, 0, 0, 0.23)',
-    paddingTop: 23,
     borderRadius: 23
+  },
+  languageSelector: {
+    marginBottom: 8,
+    backgroundColor: 'dimgray',
+    borderRadius: 12
   },
   button: {
     backgroundColor: '#fff',
