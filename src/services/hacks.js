@@ -1,10 +1,10 @@
 import { request } from '../utils/request';
 import env from '../env.json';
 
-export const getLanguage = () =>
+export const getHacks = () =>
   request.axios({
     options: {
-      url: `${env.API_URL_BASE}/api/session/current_language`,
+      url: `${env.API_URL_BASE}/api/hacks`,
       method: 'get'
     }
   });

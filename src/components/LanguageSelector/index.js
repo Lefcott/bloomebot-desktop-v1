@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from '../../actions/language';
-import { changeLanguage } from '../../services/changeLanguage';
-import { getLanguage } from '../../services/getLanguage';
+import { changeLanguage } from '../../services/language';
+import { getLanguage } from '../../services/language';
 
 import getLang from './lang';
 import useStyles from './style';
