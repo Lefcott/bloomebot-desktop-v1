@@ -3,7 +3,7 @@ import { LinearProgress } from '@material-ui/core';
 
 import useStyles from './style';
 
-export default function LoadingPage(props) {
+export default function LoadingPage() {
   const classes = useStyles();
 
   return (

@@ -1,20 +1,26 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Modal, DialogTitle, Button, CircularProgress } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { Modal, DialogTitle, Button, CircularProgress, Snackbar } from '@material-ui/core';
 import { activatePayment } from '../../../../services/payments';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
+import { getCurrentUser } from '../../../../services/user';
+import { setUser } from '../../../../actions/user';
+import { ERROR_CODES } from '../../../../constants';
 import getLang from './lang';
 import useStyles from './style';
 import { goToLink } from '../../../../utils/html';
+import { Alert } from '@material-ui/lab';
 
 export default function BuyModal({ data, getOrder, onClose }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const lang = getLang(useSelector(state => state.language));
   const [paypalLink, setPaypalLink] = useState(null);
   const [paypalError, setPaypalError] = useState(false);
   const [waitingPaypalActivation, setWaitingPaypalActivation] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [alreadyPurchased, setAlreadyPurchased] = useState(false);
   const accountActivated = useRef(false);
   const [getPaypalOrder] = useState(() => () => getOrder('paypal'));
 
@@ -22,14 +28,25 @@ export default function BuyModal({ data, getOrder, onClose }) {
     let mounted = true;
     getPaypalOrder().then(response => {
       if (!mounted) return;
-      if (!response || response.status !== 200) return setPaypalError(true);
+      if (!response) return setPaypalError(true);
+      if (response.status !== 200) {
+        if (response.body.error_code === ERROR_CODES.ALREADY_PURCHASED) {
+          getCurrentUser().then(userResponse => {
+            if (!userResponse || userResponse.status !== 200)
+              return (window.location.href = userResponse.body.redirectTo);
+            dispatch(setUser(userResponse.body.user));
+          });
+          setAlreadyPurchased(true);
+          return setPaypalError(true);
+        }
+      }
       setPaypalLink(response.body.payment_link);
       setOrderId(response.body.order_id);
     });
     return function cleanup() {
       mounted = false;
     };
-  }, [getPaypalOrder]);
+  }, [dispatch, getPaypalOrder]);
 
   const handlePaypalPay = () => {
     if (accountActivated.current) return goToLink(paypalLink);
@@ -44,6 +61,13 @@ export default function BuyModal({ data, getOrder, onClose }) {
 
   return (
     <div>
+      {alreadyPurchased && (
+        <Snackbar open>
+          <Alert onClose={onClose} severity="info">
+            {lang.hackAlreadyPurchased}
+          </Alert>
+        </Snackbar>
+      )}
       <Modal open onClose={onClose} className={classes.buyModal}>
         <div className={classes.modalContainer}>
           <DialogTitle className={classes.title}>

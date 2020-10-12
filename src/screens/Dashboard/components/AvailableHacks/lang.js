@@ -1,5 +1,7 @@
 import { HACK_CODES } from '../commons/constants';
 
+const getHackDuration = (licence, month, months) =>
+  `${licence.months} ${licence.months === 1 ? month : months}`;
 export default langCode =>
   ({
     es: {
@@ -7,7 +9,8 @@ export default langCode =>
         errorGettingHacksTitle: 'Error interno',
         errorGettingHacks: 'Hubo un error al obtener los hacks disponibles'
       },
-      hackButtonText: licence => `Comprar por ${licence.months} ${licence.months === 1 ? 'mes' : 'meses'}`,
+      hackDuration: licence => getHackDuration(licence, 'mes', 'meses'),
+      hackButtonText: licence => `Comprar por ${getHackDuration(licence, 'mes', 'meses')}`,
       hackDescriptions: {
         [HACK_CODES.AOE2]: 'Shortcuts para construcción rápida.'
       },
@@ -16,6 +19,10 @@ export default langCode =>
         description: 'Descripción',
         price: 'Precio',
         duration: 'Duración'
+      },
+      actions: {
+        executeHack: 'Ejecutar',
+        configureHack: 'Configurar'
       }
     },
     en: {
@@ -23,15 +30,20 @@ export default langCode =>
         errorGettingHacksTitle: 'Internal Error',
         errorGettingHacks: 'There was an error getting the available hacks'
       },
-      hackButtonText: licence => `Buy for ${licence.months} ${licence.months === 1 ? 'month' : 'months'}`,
+      hackDuration: licence => getHackDuration(licence, 'month', 'months'),
+      hackButtonText: licence => `Buy for ${getHackDuration(licence, 'month', 'months')}`,
       hackDescriptions: {
-        [HACK_CODES.AOE2]: 'Fast building shortcuts.'
+        [HACK_CODES.AOE2]: 'Shortcuts for building faster.'
       },
       fields: {
         game: 'Game',
-        description: 'Descripción',
-        price: 'Precio',
+        description: 'Description',
+        price: 'Price',
         duration: 'Duration'
+      },
+      actions: {
+        executeHack: 'Execute',
+        configureHack: 'Configure'
       }
     }
   }[langCode]);

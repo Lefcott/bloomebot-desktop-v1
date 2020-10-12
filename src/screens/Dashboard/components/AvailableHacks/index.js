@@ -18,6 +18,7 @@ export default function Panel() {
   const classes = useStyle();
   const lang = getLang(useSelector(({ language }) => language));
   const hacks = useSelector(store => store.hacks);
+  const user = useSelector(store => store.user);
   const [selectedHack, setSelectedHack] = useState(null);
   const [licenceID, setLicenceID] = useState(null);
   const [hackError, setHackError] = useState(false);
@@ -64,13 +65,26 @@ export default function Panel() {
           </div>
           <CardContent className={classes.cardContent} key={2}>
             <Typography gutterBottom variant="h6" component="h6" key={0}>
-              <div style={{ fontSize: 16 }}>{hack.name}</div>
+              <div className={classes.secondTitle}>{hack.name}</div>
             </Typography>
             <Typography variant="caption" color="textSecondary" component="p" key={1}>
               {lang.hackDescriptions[hack.code]}
             </Typography>
-            <Typography gutterBottom variant="h5" component="h2" key={2}>
-              {hack.licences.map((licence, _licenceID) => (
+            {(() => {
+              const [userHack] = user.Hacks.filter(
+                _userHack => _userHack.Enabled && _userHack.Code === hack.code
+              );
+              const actionButtons = (
+                <div>
+                  <Button className={classes.button} key={0}>
+                    {lang.actions.executeHack}
+                  </Button>
+                  <Button className={classes.button} key={1}>
+                    {lang.actions.configureHack}
+                  </Button>
+                </div>
+              );
+              const buyButtons = hack.licences.map((licence, _licenceID) => (
                 <Button
                   className={classes.button}
                   onClick={() => handleBuy(hack, _licenceID)}
@@ -78,20 +92,26 @@ export default function Panel() {
                 >
                   {lang.hackButtonText(licence)}, {hack.licences[_licenceID].price} USD
                 </Button>
-              ))}
-            </Typography>
+              ));
+              return (
+                <Typography gutterBottom variant="h5" component="h2">
+                  {userHack ? actionButtons : buyButtons}
+                </Typography>
+              );
+            })()}
           </CardContent>
         </Card>
       ))}
       {selectedHack && (
         <BuyModal
           onClose={() => setSelectedHack(null)}
-          getOrder={platform => getHackOrder(platform, selectedHack)}
+          getOrder={platform => getHackOrder(platform, selectedHack, licenceID)}
           hack={selectedHack}
           data={{
             [lang.fields.game]: selectedHack.name,
             [lang.fields.description]: lang.hackDescriptions[selectedHack.code],
-            [lang.fields.price]: getPriceLabel(selectedHack.licences[licenceID].price, 'USD')
+            [lang.fields.price]: getPriceLabel(selectedHack.licences[licenceID].price, 'USD'),
+            [lang.fields.duration]: lang.hackDuration(selectedHack.licences[licenceID])
           }}
         />
       )}
