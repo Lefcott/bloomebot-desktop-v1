@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { Button, Typography, CircularProgress } from '@material-ui/core';
-import { Card, CardContent, CardMedia } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getHackOrder } from '../../../../services/payments';
 import BuyModal from '../commons/components/BuyModal';
+import HackCard from '../commons/components/HackCard';
 import { getHacks } from '../../../../services/hacks';
 import { setHacks } from '../../../../actions/hacks';
-import { HACK_DATA } from './constants';
 import { getPriceLabel } from './utils';
 import useStyle from './style';
 import getLang from './lang';
@@ -18,7 +17,6 @@ export default function Panel() {
   const classes = useStyle();
   const lang = getLang(useSelector(({ language }) => language));
   const hacks = useSelector(store => store.hacks);
-  const user = useSelector(store => store.user);
   const [selectedHack, setSelectedHack] = useState(null);
   const [licenceID, setLicenceID] = useState(null);
   const [hackError, setHackError] = useState(false);
@@ -52,55 +50,7 @@ export default function Panel() {
         </Alert>
       )}
       {Object.entries(hacks).map(([, hack], i) => (
-        <Card className={classes.card} key={i + 2}>
-          <CardMedia
-            className={classes.media}
-            image={HACK_DATA[hack.code].IMAGE}
-            title="Hack"
-            color="#fff"
-            key={0}
-          />
-          <div className={classes.title} key={1}>
-            {hack.name}
-          </div>
-          <CardContent className={classes.cardContent} key={2}>
-            <Typography gutterBottom variant="h6" component="h6" key={0}>
-              <div className={classes.secondTitle}>{hack.name}</div>
-            </Typography>
-            <Typography variant="caption" color="textSecondary" component="p" key={1}>
-              {lang.hackDescriptions[hack.code]}
-            </Typography>
-            {(() => {
-              const [userHack] = user.Hacks.filter(
-                _userHack => _userHack.Enabled && _userHack.Code === hack.code
-              );
-              const actionButtons = (
-                <div>
-                  <Button className={classes.button} key={0}>
-                    {lang.actions.executeHack}
-                  </Button>
-                  <Button className={classes.button} key={1}>
-                    {lang.actions.configureHack}
-                  </Button>
-                </div>
-              );
-              const buyButtons = hack.licences.map((licence, _licenceID) => (
-                <Button
-                  className={classes.button}
-                  onClick={() => handleBuy(hack, _licenceID)}
-                  key={_licenceID}
-                >
-                  {lang.hackButtonText(licence)}, {hack.licences[_licenceID].price} USD
-                </Button>
-              ));
-              return (
-                <Typography gutterBottom variant="h5" component="h2">
-                  {userHack ? actionButtons : buyButtons}
-                </Typography>
-              );
-            })()}
-          </CardContent>
-        </Card>
+        <HackCard hack={hack} onBuy={_licenceID => handleBuy(hack, _licenceID)} key={i + 2} />
       ))}
       {selectedHack && (
         <BuyModal
