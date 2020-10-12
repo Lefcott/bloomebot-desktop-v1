@@ -5,7 +5,7 @@ import { Card, CardContent, CardMedia } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getHackOrder } from '../../../../services/payments';
-import BuyModal from '../../components/BuyModal';
+import BuyModal from '../commons/components/BuyModal';
 import { getHacks } from '../../../../services/hacks';
 import { setHacks } from '../../../../actions/hacks';
 import { HACK_DATA } from './constants';

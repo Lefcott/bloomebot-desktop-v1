@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, DialogTitle, Button, CircularProgress, Snackbar } from '@material-ui/core';
-import { activatePayment } from '../../../../services/payments';
+import { Alert } from '@material-ui/lab';
+import { activatePayment } from '../../../../../../services/payments';
 import PropTypes from 'prop-types';
 
-import { getCurrentUser } from '../../../../services/user';
-import { setUser } from '../../../../actions/user';
-import { ERROR_CODES } from '../../../../constants';
+import { getCurrentUser } from '../../../../../../services/user';
+import { setUser } from '../../../../../../actions/user';
+import { ERROR_CODES } from '../../../../../../constants';
 import getLang from './lang';
 import useStyles from './style';
-import { goToLink } from '../../../../utils/html';
-import { Alert } from '@material-ui/lab';
+import { goToLink } from '../../../../../../utils/html';
 
 export default function BuyModal({ data, getOrder, onClose }) {
   const classes = useStyles();
@@ -88,7 +88,7 @@ export default function BuyModal({ data, getOrder, onClose }) {
                 onClick={handlePaypalPay}
                 disabled={waitingPaypalActivation}
               >
-                Comprar con&nbsp;<strong className={classes.paypalStrong}>PayPal</strong>
+                {lang.buyWith}&nbsp;<strong className={classes.paypalStrong}>PayPal</strong>
               </Button>
             ) : (
               <CircularProgress />
