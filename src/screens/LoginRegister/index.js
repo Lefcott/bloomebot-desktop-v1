@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Paper, DialogTitle } from '@material-ui/core';
-import { clicksOn } from 'hotkeys';
 
 import { LOGIN, REGISTER } from './constants';
 import useStyles from './style';
@@ -8,8 +7,6 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { getCurrentUser } from '../../services/user';
 import LoadingPage from '../../components/loadingPage';
-
-clicksOn();
 
 export default function LoginRegister() {
   const classes = useStyles();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Snackbar } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getHackOrder } from '../../../../services/payments';
@@ -44,10 +44,12 @@ export default function Panel() {
     <div className={classes.root}>
       {waiting && <CircularProgress className={classes.spinner} key={0} />}
       {hackError && (
-        <Alert severity="error" key={1}>
-          <AlertTitle>{lang.erorrs.errorGettingHacksTitle}</AlertTitle>
-          {lang.errors.errorGettingHacksTitle}
-        </Alert>
+        <Snackbar open>
+          <Alert severity="error" key={1}>
+            <AlertTitle>{lang.errors.errorGettingHacksTitle}</AlertTitle>
+            {lang.errors.errorGettingHacks}
+          </Alert>
+        </Snackbar>
       )}
       {Object.entries(hacks).map(([, hack], i) => (
         <HackCard hack={hack} onBuy={_licenceID => handleBuy(hack, _licenceID)} key={i + 2} />

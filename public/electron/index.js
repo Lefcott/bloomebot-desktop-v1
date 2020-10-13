@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
+import './listener';
 
 let mainWindow;
 
@@ -14,7 +15,7 @@ function createWindow() {
     webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
   });
   mainWindow.loadURL(
-    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
+    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../build/index.html')}`
   );
   if (isDev) {
     // Open the DevTools.

@@ -18,8 +18,11 @@ export default langCode =>
       },
       actions: {
         executeHack: 'Ejecutar',
+        closeHack: 'Cerrar',
         configureHack: 'Configurar'
-      }
+      },
+      openError: hack => `Hubo un error al abrir el hack para ${hack.name}`,
+      closeError: hack => `Hubo un error al cerrar el hack para ${hack.name}`
     },
     en: {
       hackDuration: licence => getHackDuration(licence, 'month', 'months'),
@@ -35,7 +38,10 @@ export default langCode =>
       },
       actions: {
         executeHack: 'Execute',
+        closeHack: 'Close',
         configureHack: 'Configure'
-      }
+      },
+      openError: hack => `There was an error when opening hack for ${hack.name}`,
+      closeError: hack => `There was an error when closing hack for ${hack.name}`
     }
   }[langCode]);

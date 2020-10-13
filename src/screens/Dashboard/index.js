@@ -22,7 +22,8 @@ export default function Dashboard() {
     const _setUser = _user => dispatch(setUser(_user));
     getCurrentUser().then(response => {
       if (!mounted) return;
-      if (!response || response.status !== 200) return (window.location.href = response.body.redirectTo);
+      if (!response) return (window.location.href = '/login');
+      if (response.status !== 200) return (window.location.href = response.body.redirectTo);
       const responseUser = response.body.user;
       _setUser(responseUser);
       socket.emit(IO_EVENTS.emit.I_AM_X, responseUser._id);
