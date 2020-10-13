@@ -14,8 +14,7 @@ ipcMain.on('turnOn', (event, hackCode) => {
     return (event.returnValue = false);
   }
   hotkeysOn[hackCode] = true;
-  hotkey.turnOn();
-  event.returnValue = true;
+  event.returnValue = hotkey.turnOn();
 });
 
 ipcMain.on('turnOff', (event, hackCode) => {
@@ -28,9 +27,9 @@ ipcMain.on('turnOff', (event, hackCode) => {
     console.error(`Hotkey not found with hack code ${hackCode}`);
     return (event.returnValue = false);
   }
-  hotkey.turnOff();
-  delete hotkeysOn[hackCode];
-  event.returnValue = true;
+  const turnedOff = hotkey.turnOff();
+  if (turnedOff) delete hotkeysOn[hackCode];
+  event.returnValue = turnedOff;
 });
 
 ipcMain.on('getHotkeysOn', event => {
