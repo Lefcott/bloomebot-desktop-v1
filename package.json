@@ -22,7 +22,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "debug": "^4.1.1",
     "electron-is-dev": "^1.2.0",
-    "iohook": "^0.6.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -34,37 +33,14 @@
     "socket.io-client": "^2.3.1",
     "uuidv4": "^6.2.4"
   },
-  "robotjs": {
-    "targets": [
-      "node-79",
-      "electron-76"
-    ]
-  },
-  "iohook": {
-    "targets": [
-      "node-79",
-      "electron-76"
-    ],
-    "platforms": [
-      "linux",
-      "win32"
-    ],
-    "arches": [
-      "x64",
-      "ia32"
-    ]
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron -r @babel/register .",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
-    "set-node-version": "scripts/set_node_version.sh",
     "dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && nodemon --watch public/electron --exec electron -r @babel/register .\"",
-    "babel-node": "babel-node",
-    "a": "electron -r @babel/register ."
+    "babel-node": "babel-node"
   },
   "eslintConfig": {
     "extends": "react-app"
