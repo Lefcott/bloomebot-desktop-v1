@@ -10,6 +10,7 @@ export const registerMany = (...registers) => {
     const wasRegistered = globalShortcut.register(accelerator, callback);
     if (wasRegistered) registeredAccelerators.push(accelerator);
     else {
+      console.error(`Failed to register accelerator ${accelerator} with callback ${callback}`);
       success = false;
       break;
     }
