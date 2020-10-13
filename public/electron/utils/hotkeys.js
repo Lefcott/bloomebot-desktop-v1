@@ -14,7 +14,7 @@ export const registerMany = (...registers) => {
       counters[accelerator] = counters[accelerator] || 0;
       counters[accelerator] += 1;
       setTimeout(() => (counters[accelerator] -= 1), pressTimeout);
-      callback();
+      callback(accelerator);
     };
     const wasRegistered = globalShortcut.register(accelerator, wrappedCallback);
     if (wasRegistered) registeredAccelerators.push(accelerator);
