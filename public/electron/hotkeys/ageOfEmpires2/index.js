@@ -1,12 +1,9 @@
 import { globalShortcut } from 'electron';
-import robotjs from 'robotjs';
 
 import { registerMany } from '../../utils/hotkeys';
+import { makeFastBuilding } from './fastBuilding';
 
-export const turnOn = () =>
-  registerMany('CommandOrControl+X', () => {
-    robotjs.dragMouse(Math.random() * 500, Math.random() * 500);
-  });
+export const turnOn = () => registerMany('Q', makeFastBuilding('Q'));
 
 export const turnOff = () => {
   globalShortcut.unregisterAll();
