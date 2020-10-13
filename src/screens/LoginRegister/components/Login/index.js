@@ -17,8 +17,8 @@ export default function Login(props) {
   const classes = useStyles();
   const lang = getLang(useSelector(state => state.language));
   const [loginStatus, setLoginStatus] = useState(LOGIN_STATUSES.WAITING_USER);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('lefcottdev@hotmail.com'); // TODO remove some day
+  const [password, setPassword] = useState('hola'); // TODO remove some day
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   if (!props.visible) return <div />;

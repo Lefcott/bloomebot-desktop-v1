@@ -1,8 +1,11 @@
 import { globalShortcut } from 'electron';
+import robotjs from 'robotjs';
+
+import { registerMany } from '../../utils/hotkeys';
 
 export const turnOn = () => {
-  const registered = globalShortcut.register('CommandOrControl+X', () => {
-    console.log('CommandOrControl+X is pressed');
+  const registered = registerMany('CommandOrControl+X', () => {
+    robotjs.dragMouse(Math.random() * 500, Math.random() * 500);
   });
 
   if (!registered) {
@@ -11,7 +14,8 @@ export const turnOn = () => {
   }
   return true;
 };
+
 export const turnOff = () => {
-  globalShortcut.unregister('CommandOrControl+X');
+  globalShortcut.unregisterAll();
   return true;
 };
