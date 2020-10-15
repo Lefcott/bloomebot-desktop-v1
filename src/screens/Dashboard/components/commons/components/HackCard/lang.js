@@ -18,7 +18,7 @@ export default langCode =>
       },
       actions: {
         executeHack: 'Ejecutar',
-        closeHack: 'Cerrar',
+        closeHack: 'Detener ejecución',
         configureHack: 'Configurar'
       },
       openError: hack => `Hubo un error al abrir el hack para ${hack.name}`,
@@ -38,7 +38,7 @@ export default langCode =>
       },
       actions: {
         executeHack: 'Execute',
-        closeHack: 'Close',
+        closeHack: 'Stop executing',
         configureHack: 'Configure'
       },
       openError: hack => `There was an error when opening hack for ${hack.name}`,

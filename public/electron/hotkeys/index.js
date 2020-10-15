@@ -1,1 +1,1 @@
-export const AOE2 = require('./ageOfEmpires2');
+export const { default: AOE2 } = require('./ageOfEmpires2');
