@@ -6,14 +6,18 @@ import './listener';
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    icon: `${__dirname}/favicon.ico`,
-    width: 852,
-    height: 480,
-    center: true,
-    hasShadow: true,
-    webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
-  });
+  try {
+    mainWindow = new BrowserWindow({
+      // icon: `${__dirname}\\favicon.ico`,
+      width: 852,
+      height: 480,
+      center: true,
+      hasShadow: true,
+      webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
+    });
+  } catch (e) {
+    console.error(e);
+  }
   mainWindow.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../build/index.html')}`
   );

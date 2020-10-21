@@ -22,6 +22,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "debug": "^4.1.1",
     "electron-is-dev": "^1.2.0",
+    "input-event": "^1.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -38,9 +39,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "robotjs-rebuild": "npm rebuild --runtime=electron --target=1.1.3 --disturl=https://atom.io/download/atom-shell --abi=48",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
-    "dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && nodemon --watch public/electron --exec electron -r @babel/register .\"",
-    "babel-node": "babel-node"
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && nodemon --watch public/electron --exec electron -r @babel/register .\"",
+    "babel-node": "babel-node",
+    "electron": "electron -r @babel/register ."
   },
   "eslintConfig": {
     "extends": "react-app"

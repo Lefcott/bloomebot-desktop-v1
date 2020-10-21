@@ -10,7 +10,6 @@ ipcMain.on('turnOn', (event, hackCode) => {
     return (event.returnValue = false);
   }
   const hotkey = Hotkeys[hackCode];
-  console.log('Hotkeys[hackCode]', Hotkeys[hackCode]);
   if (!hotkey) {
     console.error(`Hotkey not found with hack code ${hackCode}`);
     return (event.returnValue = false);
