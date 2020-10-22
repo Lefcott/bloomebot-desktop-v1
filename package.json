@@ -26,7 +26,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "debug": "^4.1.1",
     "electron-is-dev": "^1.2.0",
-    "input-event": "^1.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
