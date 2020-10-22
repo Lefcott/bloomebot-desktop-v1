@@ -5,3 +5,4 @@ junit/
 dist/
 mobiles/
 !node_modules/some-package/
+dist
