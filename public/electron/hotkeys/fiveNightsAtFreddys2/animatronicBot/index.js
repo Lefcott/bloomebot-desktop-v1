@@ -22,14 +22,10 @@ export const activateAnimatronBot = () => {
           const nextNode = path[i + 1];
           const place = PLACES[node];
           const nextPlace = PLACES[nextNode];
-          const moveX = place.checkAt ? place.checkAt.x : 0;
-          const moveY = place.checkAt ? place.checkAt.y : 0;
-          const nextMoveX = nextPlace.checkAt ? nextPlace.checkAt.x : 0;
-          const nextMoveY = nextPlace.checkAt ? nextPlace.checkAt.y : 0;
+          const color = robotjs.getPixelColor(place.x, place.y);
 
-          const color = robotjs.getPixelColor(place.x + moveX, place.y + moveY);
           if (!compareStrings(color, SELECTED_COLOR, 3)) continue;
-          robotjs.moveMouse(nextPlace.x + nextMoveX + randXMove, nextPlace.y + nextMoveY + randYMove);
+          robotjs.moveMouse(nextPlace.x + randXMove, nextPlace.y + randYMove);
           robotjs.mouseClick('left', false);
           foundSelected = true;
           break;
@@ -42,7 +38,7 @@ export const activateAnimatronBot = () => {
     } catch (e) {
       console.error(e);
     }
-  }, 10);
+  }, 2);
 };
 
 export const setAnimatronic = name => {
