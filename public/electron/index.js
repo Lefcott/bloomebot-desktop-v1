@@ -14,17 +14,13 @@ function createWindow() {
       height: 480,
       center: true,
       hasShadow: true,
-      webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js` }
+      webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js`, devTools: isDev }
     });
   } catch (e) {
     console.error(e);
   }
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../index.html')}`);
-  if (isDev) {
-    // Open the DevTools.
-    // BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    mainWindow.webContents.openDevTools();
-  }
+  if (isDev) mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => (mainWindow = null));
 }
 
@@ -36,8 +32,4 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+app.on('activate', () => mainWindow === null && createWindow());
