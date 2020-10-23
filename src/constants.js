@@ -5,3 +5,7 @@ export const SECTIONS = {
 export const ERROR_CODES = {
   ALREADY_PURCHASED: 'already_purchased'
 };
+export const SCREENS = {
+  LOGIN: 'LOGIN',
+  DASHBOARD: 'DASHBOARD'
+};

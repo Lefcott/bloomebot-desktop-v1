@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getCurrentUser } from '../../services/user';
 import { setUser } from '../../actions/user';
+import { setScreen } from '../../actions/screen';
 import { socket } from '../../utils/socketIo';
 import LoadingPage from '../../components/loadingPage';
 import Panel from './components/Panel';
 import AvailableHacks from './components/AvailableHacks';
 import { IO_EVENTS } from './constants';
 import useStyle from './style';
+import { SCREENS } from '../../constants';
 
 export default function Dashboard() {
   const classes = useStyle();
@@ -22,8 +24,7 @@ export default function Dashboard() {
     const _setUser = _user => dispatch(setUser(_user));
     getCurrentUser().then(response => {
       if (!mounted) return;
-      if (!response) return (window.location.href = '/login');
-      if (response.status !== 200) return (window.location.href = response.body.redirectTo);
+      if (!response || response.status !== 200) return dispatch(setScreen(SCREENS.LOGIN));
       const responseUser = response.body.user;
       _setUser(responseUser);
       socket.emit(IO_EVENTS.emit.I_AM_X, responseUser._id);

@@ -26,11 +26,6 @@
     "log": "readonly",
     "logError": "readonly"
   },
-  "settings": {
-    "import/resolver": {
-      "babel-plugin-root-import": {}
-    }
-  },
   "rules": {
     "react/jsx-filename-extension": [
       1,

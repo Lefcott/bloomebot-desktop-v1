@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 
 import { getCurrentUser } from '../../../../../../services/user';
 import { setUser } from '../../../../../../actions/user';
-import { ERROR_CODES } from '../../../../../../constants';
+import { setScreen } from '../../../../../../actions/screen';
+import { ERROR_CODES, SCREENS } from '../../../../../../constants';
 import getLang from './lang';
 import useStyles from './style';
 import { goToLink } from '../../../../../../utils/html';
@@ -32,8 +33,7 @@ export default function BuyModal({ data, getOrder, onClose }) {
       if (response.status !== 200) {
         if (response.body.error_code === ERROR_CODES.ALREADY_PURCHASED) {
           getCurrentUser().then(userResponse => {
-            if (!userResponse || userResponse.status !== 200)
-              return (window.location.href = userResponse.body.redirectTo);
+            if (!userResponse || userResponse.status !== 200) return dispatch(setScreen(SCREENS.LOGIN));
             dispatch(setUser(userResponse.body.user));
           });
           setAlreadyPurchased(true);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { DialogTitle, FormControl, Link, Button, TextField, LinearProgress } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { createValidation, validateAll, hookConstants } from 'utils/hooks';
 import { checkEmail, checkName, checkPassword, checkEquals } from 'validators';
 import { register } from 'services/register';
@@ -10,11 +10,14 @@ import LanguageSelector from 'components/LanguageSelector';
 
 import useStyles from '../commons/style';
 
+import { SCREENS } from '../../../../constants';
 import getLang from './lang';
 import { FIELDS, REGISTER_STATUSES } from './constants';
+import { setScreen } from '../../../../actions/screen';
 
 export default function Register(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const lang = getLang(useSelector(state => state.language));
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,7 +66,7 @@ export default function Register(props) {
     if (!response || ![200, 409].includes(response.status)) return setRegisterStatus(REGISTER_STATUSES.ERROR);
     if (response.status === 409) return setRegisterStatus(REGISTER_STATUSES.EMAIL_ALREADY_EXISTS);
     setRegisterStatus(REGISTER_STATUSES.REGISTERED);
-    window.location.href = response.body.redirectTo;
+    dispatch(setScreen(SCREENS.DASHBOARD));
   };
   const handleEnter = ({ key }) => {
     if (key !== 'Enter') return;

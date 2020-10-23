@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { DialogTitle, FormControl, Link, TextField, Button, LinearProgress } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { PropTypes } from 'prop-types';
-import { useSelector } from 'react-redux';
 import { createValidation, validateAll, hookConstants } from '../../../../utils/hooks';
 import { checkEmail, checkPassword } from '../../../../validators';
 import { login } from '../../../../services/login';
@@ -10,11 +10,14 @@ import LanguageSelector from '../../../../components/LanguageSelector';
 
 import useStyles from '../commons/style';
 
+import { SCREENS } from '../../../../constants';
 import { LOGIN_STATUSES, FIELDS } from './constants';
 import getLang from './lang';
+import { setScreen } from '../../../../actions/screen';
 
 export default function Login(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const lang = getLang(useSelector(state => state.language));
   const [loginStatus, setLoginStatus] = useState(LOGIN_STATUSES.WAITING_USER);
   const [email, setEmail] = useState('lefcottdev@hotmail.com'); // TODO remove some day
@@ -38,7 +41,7 @@ export default function Login(props) {
     if (!response || ![200, 403].includes(response.status)) return setLoginStatus(LOGIN_STATUSES.ERROR);
     if (response.status === 403) return setLoginStatus(LOGIN_STATUSES.INVALID_CREDENTIALS);
     setLoginStatus(LOGIN_STATUSES.LOGGED_IN);
-    window.location.href = response.body.redirectTo;
+    dispatch(setScreen(SCREENS.DASHBOARD));
   };
   const handleEnter = ({ key }) => {
     if (key !== 'Enter') return;

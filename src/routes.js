@@ -1,20 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import LoginRegister from './screens/LoginRegister';
 import Dashboard from './screens/Dashboard';
+import { SCREENS } from './constants';
 
 export default function Routes() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/">
-          <LoginRegister />
-        </Route>
-      </Switch>
-    </Router>
-  );
+  const screen = useSelector(store => store.screen);
+
+  if (screen === SCREENS.DASHBOARD) return <Dashboard />;
+  if (screen === SCREENS.LOGIN) return <LoginRegister />;
 }
