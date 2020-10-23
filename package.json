@@ -2,7 +2,7 @@
   "name": "bloomebot-desktop",
   "version": "0.1.0",
   "private": true,
-  "main": "public/electron",
+  "main": "build/electron",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lefcott/bloomebot-desktop-v1.git"
@@ -45,8 +45,8 @@
     "react-build": "react-scripts build",
     "electron-transpile": "babel -d ./build/electron ./public/electron -s",
     "build": "npm run react-build && npm run electron-transpile",
-    "compile-win": "electron-packager . bloomebot-desktop --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=dist --version-string.CompanyName=Bloomebot --version-string.FileDescription=BloomebotHacks --version-string.ProductName=\"Bloomebot Hacks\" --output-path=dist/win",
-    "robotjs-rebuild": "npm rebuild --runtime=electron --target=1.1.3 --disturl=https://atom.io/download/atom-shell --abi=48",
+    "compile-win": "electron-packager . bloomebot-desktop --platform=win32 --arch=x64",
+    "robotjs-rebuild": "npm rebuild --runtime=electron --target=9.3.2 --disturl=https://atom.io/download/atom-shell --abi=59",
     "babel-node": "babel-node",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
     "cbuild": "node-gyp configure build"
@@ -68,7 +68,7 @@
   },
   "cmake-js": {
     "runtime": "electron",
-    "runtimeVersion": "9.3.1"
+    "runtimeVersion": "9.3.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
