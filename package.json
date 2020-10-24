@@ -2,7 +2,7 @@
   "name": "bloomebot-desktop",
   "version": "0.1.0",
   "private": true,
-  "main": "build/electron",
+  "main": "build/electron/main",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lefcott/bloomebot-desktop-v1.git"
@@ -35,14 +35,14 @@
     "uuidv4": "^6.2.4"
   },
   "scripts": {
-    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && nodemon --watch public/electron --exec electron -r @babel/register public/electron\"",
-    "electron": "electron -r @babel/register public/electron",
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && cd electron && npm run electron\"",
+    "electron": "cd electron && electron .",
     "start": "react-scripts start",
     "react-build": "react-scripts build",
-    "electron-transpile": "babel -d ./build/electron ./public/electron -s",
+    "electron-transpile": "babel -d ./build/electron ./electron -s",
     "build": "npm run react-build && npm run electron-transpile",
-    "compile-win": "electron-packager . bloomebot-desktop --platform=win32 --arch=x64 --prune",
-    "robotjs-rebuild": "npm rebuild --runtime=electron --target=9.3.2 --disturl=https://atom.io/download/atom-shell --abi=59",
+    "compile-win": "cd electron && npm run compile-win",
+    "install": "cd electron && npm install",
     "babel-node": "babel-node",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
     "cbuild": "node-gyp configure build"
@@ -68,7 +68,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^24.9.0",
     "concurrently": "^5.3.0",
     "electron": "^9.3.2",
     "electron-builder": "^22.9.1",

@@ -44,7 +44,8 @@ export const activateAnimatronBot = () => {
 export const setAnimatronic = name => {
   const newAnimatronic = ANIMATRONICS[name];
   if (!newAnimatronic) return console.error(`Bad animatronic name, possible names are: ${ANIMATRONIC_NAMES}`);
-  console.log('Set animatronics', name, newAnimatronic);
+  if (newAnimatronic.onSelect) console.log('on select') || newAnimatronic.onSelect();
+  console.log('Set animatronic', name);
   animatronic = newAnimatronic;
 };
 

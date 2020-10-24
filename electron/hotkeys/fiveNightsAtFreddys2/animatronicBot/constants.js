@@ -1,3 +1,6 @@
+import path from 'path';
+import { playSound } from '../../../emitter';
+
 export const SELECTED_COLOR = 'c2dd00';
 export const DEFAULT_COORDS = { x: 390, y: 555 };
 /** @typedef {'CAM_01' | 'CAM_02' | 'CAM_03' | 'CAM_04' | 'CAM_05' | 'CAM_06' | 'CAM_07' | 'CAM_08' | 'CAM_09' | 'CAM_10' | 'CAM_11' | 'CAM_12' | 'CORRIDOR' | 'OFFICE'}  Place  */
@@ -26,30 +29,37 @@ export const ANIMATRONIC_NAMES = {
   TOY_CHICA: 'toyChica',
   MANGLE: 'mangle'
 };
-/** @typedef {{ paths: Place[][] }} Animatronic  */
+/** @typedef {{ paths: Place[][], onSelect: Function }} Animatronic  */
 export const ANIMATRONICS = {
   [ANIMATRONIC_NAMES.FREDDY]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/freddy.mp3'),
     paths: [['CAM_08', 'CAM_07', 'CORRIDOR']]
   },
   [ANIMATRONIC_NAMES.BONNIE]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/bonnie.mp3'),
     paths: [
       ['CAM_08', 'CAM_07', 'CORRIDOR'],
       ['CAM_01', 'CAM_05', 'OFFICE']
     ]
   },
   [ANIMATRONIC_NAMES.CHICA]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/chica.mp3'),
     paths: [['CAM_08', 'CAM_04', 'CAM_02', 'CAM_06', 'OFFICE']]
   },
   [ANIMATRONIC_NAMES.TOY_FREDDY]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/toyFreddy.mp3'),
     paths: [['CAM_09', 'CAM_10', 'CORRIDOR']]
   },
   [ANIMATRONIC_NAMES.TOY_BONNIE]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/toyBonnie.mp3'),
     paths: [['CAM_09', 'CAM_03', 'CAM_04', 'CAM_02', 'CAM_06', 'OFFICE']]
   },
   [ANIMATRONIC_NAMES.TOY_CHICA]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/toyChica.mp3'),
     paths: [['CAM_09', 'CAM_07', 'CORRIDOR', 'CAM_01', 'CAM_05', 'OFFICE']]
   },
   [ANIMATRONIC_NAMES.MANGLE]: {
+    onSelect: () => playSound('./sounds/fiveNightsAtFreddys2/mangle.mp3'),
     paths: [
       ['CAM_12', 'CAM_11', 'CAM_10', 'CAM_07', 'CORRIDOR'],
       ['CAM_02', 'CAM_06', 'OFFICE']

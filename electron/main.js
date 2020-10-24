@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
+import { defineEvents } from './emitter';
 import './listener';
 import './updater';
 
@@ -19,6 +20,7 @@ function createWindow() {
   } catch (e) {
     console.error(e);
   }
+  defineEvents(mainWindow.webContents);
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../index.html')}`);
   if (isDev) mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => (mainWindow = null));

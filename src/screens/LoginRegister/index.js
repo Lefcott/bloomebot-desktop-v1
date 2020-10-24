@@ -24,7 +24,7 @@ export default function LoginRegister() {
       if (response && response.status === 200) return dispatch(setScreen(SCREENS.DASHBOARD));
       setLoading(false);
     });
-  }, []);
+  }, [dispatch]);
 
   return loading ? (
     <LoadingPage />
