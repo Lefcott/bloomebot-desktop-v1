@@ -24,3 +24,5 @@ yarn-error.log*
 package-lock.json
 build
 dist
+react_build
+bloomebot-desktop*

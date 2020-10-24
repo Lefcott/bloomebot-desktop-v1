@@ -2,8 +2,10 @@
   "presets": [
     "@babel/preset-env"
   ],
+  "ignore": ["electron/node_modules","/electron/node_modules","./electron/node_modules"],
   "plugins": [
     "@babel/plugin-proposal-object-rest-spread",
+    "import",
     [
       "module-resolver",
       {

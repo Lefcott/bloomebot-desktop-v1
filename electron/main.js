@@ -21,7 +21,7 @@ function createWindow() {
     console.error(e);
   }
   defineEvents(mainWindow.webContents);
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../index.html')}`);
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './react_build/index.html')}`);
   if (isDev) mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => (mainWindow = null));
 }
