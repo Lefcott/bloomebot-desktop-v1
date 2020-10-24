@@ -26,3 +26,5 @@ build
 dist
 react_build
 bloomebot-desktop*
+/electron/dotnet/bin
+/electron/dotnet/obj
