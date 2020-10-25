@@ -8,6 +8,7 @@
     "url": "https://github.com/Lefcott/bloomebot-desktop-v1.git"
   },
   "dependencies": {
+    "edge": "^7.10.1",
     "electron-is-dev": "^1.2.0",
     "esm": "^3.2.25",
     "robotjs": "^0.6.0",

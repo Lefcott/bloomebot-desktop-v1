@@ -24,7 +24,7 @@
     "uuidv4": "^6.2.4"
   },
   "scripts": {
-    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && cd electron && npm run electron\"",
+    "dev": "concurrently --names React,.NET,Electron \"npm start\" \"cd electron/dotnet && dotnet watch run\" \"wait-on http://localhost:3000 && cd electron && npm run electron\"",
     "electron": "cd electron && electron .",
     "start": "react-scripts start",
     "react-build": "react-scripts build",
