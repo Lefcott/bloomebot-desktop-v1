@@ -1,5 +1,5 @@
 import { request } from '../utils/request';
-import env from '../env.json';
+import { env } from '../utils/events/emitter';
 
 export const register = (email, password, name, surname) =>
   request.axios({

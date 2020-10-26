@@ -1,5 +1,8 @@
 import isDev from 'electron-is-dev';
 
+import env from './env';
+import rollbar from './utils/rollbar';
+
 import { globalShortcut, ipcMain } from 'electron';
 
 import * as Hotkeys from './hotkeys';
@@ -38,4 +41,6 @@ ipcMain.on('turnOff', (event, hackCode) => {
 });
 
 ipcMain.on('getHotkeysOn', event => (event.returnValue = Object.keys(hotkeysOn)));
-ipcMain.on('isDev', event => (event.returnValue = isDev));
+ipcMain.on('getIsDev', event => (event.returnValue = isDev));
+ipcMain.on('getEnv', event => (event.returnValue = env));
+ipcMain.on('getRollbar', event => (event.returnValue = rollbar));

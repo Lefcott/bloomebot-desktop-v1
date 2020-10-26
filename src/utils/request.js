@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { check } from '@lefcott/filter-json';
 import axios from 'axios';
 
-import { rollbar } from './rollbar';
+import { rollbar } from './events/emitter';
 
 axios.defaults.withCredentials = true;
 

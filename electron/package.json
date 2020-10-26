@@ -11,7 +11,7 @@
     "electron-is-dev": "^1.2.0",
     "esm": "^3.2.25",
     "robotjs": "^0.6.0",
-    "rollbar": "^2.19.3",
+    "rollbar": "^2.19.4",
     "update-electron-app": "^2.0.1"
   },
   "scripts": {

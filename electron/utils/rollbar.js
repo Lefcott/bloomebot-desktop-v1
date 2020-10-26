@@ -1,6 +1,6 @@
 import Rollbar from 'rollbar';
 
-import env from '../env.json';
+import env from '../env';
 
 export const rollbar = new Rollbar({
   accessToken: env.ROLLBAR_ACCESS_TOKEN,
