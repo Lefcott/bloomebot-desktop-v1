@@ -17,7 +17,7 @@
   "scripts": {
     "electron": "nodemon --watch . --exec electron .",
     "compile-win-old": "electron-packager . bloomebot-desktop --platform=win32 --arch=x64 --out-dir build/electron --prune --overwrite",
-    "compile-win": "dotnet publish && electron-builder",
+    "compile-win": "cd dotnet && dotnet publish && cd .. && electron-builder",
     "robotjs-rebuild": "npm rebuild --runtime=electron --target=9.3.2 --disturl=https://atom.io/download/atom-shell --abi=59"
   },
   "eslintConfig": {
