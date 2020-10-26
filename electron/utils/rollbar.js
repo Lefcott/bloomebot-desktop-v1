@@ -1,12 +1,14 @@
+import isDev from 'electron-is-dev';
+
 import Rollbar from 'rollbar';
 
-import env from '../env';
+import { ROLLBAR_ACCESS_TOKEN } from '../env';
 
-export const rollbar = new Rollbar({
-  accessToken: env.ROLLBAR_ACCESS_TOKEN,
+export default new Rollbar({
+  accessToken: ROLLBAR_ACCESS_TOKEN,
   captureUncaught: true,
   captureUnhandledRejections: true,
-  environment: env.NODE_ENV,
+  environment: isDev ? 'localhost' : 'production',
   verbose: true,
   itemsPerMinute: 500,
   maxItems: 500000

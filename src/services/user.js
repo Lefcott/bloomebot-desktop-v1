@@ -1,5 +1,5 @@
 import { request } from '../utils/request';
-import env from '../env';
+import { env } from '../utils/events/emitter';
 
 export const getCurrentUser = () =>
   request.axios({
