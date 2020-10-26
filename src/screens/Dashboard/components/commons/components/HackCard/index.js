@@ -3,15 +3,11 @@ import { useSelector } from 'react-redux';
 import { Button, Card, CardContent, CardMedia, Snackbar, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { sendEvent } from '../../../../../../utils/events';
+import { getOpenHacks, turnOn, turnOff } from '../../../../../../utils/events';
 import { HACK_DATA } from './constants';
 import useStyle from './style';
 import getLang from './lang';
 import { Alert } from '@material-ui/lab';
-
-const getOpenHacks = () => sendEvent('getHotkeysOn');
-const turnOn = hackCode => sendEvent('turnOn', hackCode);
-const turnOff = hackCode => sendEvent('turnOff', hackCode);
 
 export default function HackCard({ hack, onBuy }) {
   const classes = useStyle();

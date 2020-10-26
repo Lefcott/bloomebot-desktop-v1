@@ -3,7 +3,6 @@ import path from 'path';
 import isDev from 'electron-is-dev';
 import { defineEvents } from './emitter';
 import './listener';
-import './updater';
 import { activateHelloWorld } from './utils/cSharp';
 
 let mainWindow;
@@ -13,7 +12,7 @@ activateHelloWorld();
 function createWindow() {
   try {
     mainWindow = new BrowserWindow({
-      // icon: `${__dirname}\\favicon.ico`,
+      icon: `${__dirname}\\favicon.ico`,
       width: 852,
       height: 480,
       center: true,
@@ -25,7 +24,7 @@ function createWindow() {
   }
   defineEvents(mainWindow.webContents);
   mainWindow.loadURL(
-    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './react_build/index.html')}`
+    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './build/index.html')}`
   );
   if (isDev) mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => (mainWindow = null));

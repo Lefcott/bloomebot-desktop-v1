@@ -1,3 +1,5 @@
+import isDev from 'electron-is-dev';
+
 import { globalShortcut, ipcMain } from 'electron';
 
 import * as Hotkeys from './hotkeys';
@@ -36,3 +38,4 @@ ipcMain.on('turnOff', (event, hackCode) => {
 });
 
 ipcMain.on('getHotkeysOn', event => (event.returnValue = Object.keys(hotkeysOn)));
+ipcMain.on('isDev', event => (event.returnValue = isDev));

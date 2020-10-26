@@ -4,6 +4,7 @@ import { DialogTitle, FormControl, Link, TextField, Button, LinearProgress } fro
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { PropTypes } from 'prop-types';
 import { createValidation, validateAll, hookConstants } from '../../../../utils/hooks';
+import { isDev } from '../../../../utils/events';
 import { checkEmail, checkPassword } from '../../../../validators';
 import { login } from '../../../../services/login';
 import LanguageSelector from '../../../../components/LanguageSelector';
@@ -20,8 +21,8 @@ export default function Login(props) {
   const dispatch = useDispatch();
   const lang = getLang(useSelector(state => state.language));
   const [loginStatus, setLoginStatus] = useState(LOGIN_STATUSES.WAITING_USER);
-  const [email, setEmail] = useState('lefcottdev@hotmail.com'); // TODO remove some day
-  const [password, setPassword] = useState('hola'); // TODO remove some day
+  const [email, setEmail] = useState(isDev ? 'lefcottdev@hotmail.com' : '');
+  const [password, setPassword] = useState(isDev ? 'hola' : '');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   if (!props.visible) return <div />;
