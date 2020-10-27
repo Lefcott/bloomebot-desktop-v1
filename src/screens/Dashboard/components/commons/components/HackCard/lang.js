@@ -9,7 +9,8 @@ export default langCode =>
       hackButtonText: licence => `Comprar por ${getHackDuration(licence, 'mes', 'meses')}`,
       hackDescriptions: {
         [HACK_CODES.AOE2]: 'Shortcuts para construcción rápida.',
-        [HACK_CODES.FNAF2]: 'Animatrones automaticos'
+        [HACK_CODES.FNAF2]: 'Animatrones automaticos',
+        [HACK_CODES.CS1_6]: 'Dinero siempre en $16000'
       },
       fields: {
         game: 'Juego',
@@ -30,7 +31,8 @@ export default langCode =>
       hackButtonText: licence => `Buy for ${getHackDuration(licence, 'month', 'months')}`,
       hackDescriptions: {
         [HACK_CODES.AOE2]: 'Shortcuts for building faster.',
-        [HACK_CODES.FNAF2]: 'Automatic animatrons'
+        [HACK_CODES.FNAF2]: 'Automatic animatrons',
+        [HACK_CODES.CS1_6]: 'Always $16000'
       },
       fields: {
         game: 'Game',

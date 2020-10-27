@@ -34,9 +34,10 @@ const connect = async () => {
 };
 
 /** @param {string} name @param {boolean} activate @param {*} data  */
-export const sendEvent = async (name, activate, data) => {
+export const sendCSharpEvent = async (name, activate, data) => {
   await connectPromise;
   client.write(JSON.stringify({ name, activate, data }));
+  return true;
 };
 
 export const init = async () => {

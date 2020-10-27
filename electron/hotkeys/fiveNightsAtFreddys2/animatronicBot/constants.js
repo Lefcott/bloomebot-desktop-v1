@@ -1,5 +1,4 @@
-import path from 'path';
-import { playSound } from '../../../emitter';
+import { playSound } from '../../../events/react/emitter';
 
 export const SELECTED_COLOR = 'c2dd00';
 export const DEFAULT_COORDS = { x: 390, y: 555 };

@@ -1,13 +1,10 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
-import { defineEvents } from './emitter';
-import './listener';
-import { activateHelloWorld } from './utils/cSharp';
+import { defineEvents } from './events/react/emitter';
+import './events';
 
 let mainWindow;
-// TODO remove
-activateHelloWorld();
 
 function createWindow() {
   try {

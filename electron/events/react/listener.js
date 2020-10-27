@@ -1,11 +1,11 @@
 import isDev from 'electron-is-dev';
 
-import * as env from './env';
-import rollbar from './utils/rollbar';
+import * as env from '../../env';
+import rollbar from '../../utils/rollbar';
 
 import { globalShortcut, ipcMain } from 'electron';
 
-import * as Hotkeys from './hotkeys';
+import * as Hotkeys from '../../hotkeys';
 
 const hotkeysOn = {};
 
@@ -21,7 +21,7 @@ ipcMain.on('turnOn', (event, hackCode) => {
   }
   hotkeysOn[hackCode] = true;
   console.log(`Open hack ${hackCode}`);
-  event.returnValue = hotkey();
+  event.returnValue = console.log('ret val', hotkey.up()) || true;
 });
 
 ipcMain.on('turnOff', (event, hackCode) => {
@@ -37,6 +37,7 @@ ipcMain.on('turnOff', (event, hackCode) => {
   globalShortcut.unregisterAll();
   delete hotkeysOn[hackCode];
   console.log(`Close hack ${hackCode}`);
+  event.returnValue = hotkey.down();
   event.returnValue = true;
 });
 

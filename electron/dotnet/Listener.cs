@@ -19,20 +19,12 @@ namespace Listener
 
                 EmitEvent("Hello From Dotnet 1");
 
-                var events = new Events();
                 while (server.CanRead)
                 {
                     var eventData = ReceiveEvent();
                     if (eventData.empty) continue;
 
-                    switch (eventData.name)
-                    {
-                        case "HelloWorld":
-                            if (eventData.activate) events.helloWorld.Activate();
-                            else events.helloWorld.Deactivate();
-                            Console.WriteLine("Got HelloWoooorld!!!");
-                            break;
-                    }
+                    Events.Switcher.SwitchEvent(eventData);
                 }
             }
         }
@@ -59,10 +51,6 @@ namespace Listener
 
             return JsonSerializer.Deserialize<Event>(new ASCIIEncoding().GetString(Message));
         }
-    }
-    public class Events
-    {
-        public HelloWorldEvent helloWorld = new HelloWorldEvent();
     }
     public class Event
     {
