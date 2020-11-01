@@ -11,26 +11,42 @@ let resolveConnect;
 let connectPromise;
 /** @type {import('net').Socket}  */
 let client;
+let pingActivated = false;
 
 const startConnectPromise = () => (connectPromise = new Promise(resolve => (resolveConnect = resolve)));
 
 startConnectPromise();
-const connect = async () => {
-  startConnectPromise();
-  fs.writeFileSync(KEEP_PATH, '');
-  console.log('Wait 7 seconds');
-  await wait(7000);
-  console.log('Connecting with .NET...');
-  connectPromise = null;
-  client = createConnection(`${PIPE_PATH}${PIPE_NAME}`, () => {
-    console.log('connected to .NET server!');
-  });
+/** @param {boolean} restartDotnet  */
+const connect = async restartDotnet => {
+  const removeListeners = () => {
+    client.removeAllListeners('error');
+  };
+  const onError = error => {
+    if (['ENOENT', 'EPIPE', 'ERR_STREAM_DESTROYED'].includes(error.code)) {
+      console.log(`Reconnecting because of ${error.code}...`);
 
-  client.on('end', () => {
-    console.log('disconnected from C#, reconnecting...');
-    connect();
+      pingActivated = false;
+      client.destroy();
+      removeListeners();
+      return connect(false);
+    }
+    console.error(error);
+  };
+  const addListeners = () => {
+    client.addListener('error', onError);
+  };
+
+  startConnectPromise();
+  if (restartDotnet) fs.writeFileSync(KEEP_PATH, '');
+  await wait(2000);
+
+  console.log('Connecting...');
+  client = createConnection(`${PIPE_PATH}${PIPE_NAME}`, () => {
+    pingActivated = true;
+    resolveConnect();
+    connectPromise = null;
   });
-  resolveConnect();
+  addListeners();
 };
 
 /** @param {string} name @param {boolean} activate @param {*} data  */
@@ -41,12 +57,17 @@ export const sendCSharpEvent = async (name, activate, data) => {
 };
 
 export const init = async () => {
-  if (isDev) return connect();
+  if (isDev) {
+    setInterval(() => {
+      if (!pingActivated) return;
+      sendCSharpEvent('ping', true, '');
+    }, 1000);
+    return connect(true);
+  }
   const dotnet = spawn(EXE_PATH);
 
   dotnet.stdout.on('data', async data => {
     await connectPromise;
-    data = `${data}`;
-    console.log('.Net:', data);
+    console.log(`[.NET] ${data}`);
   });
 };

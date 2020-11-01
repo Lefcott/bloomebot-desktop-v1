@@ -1,0 +1,4 @@
+﻿X::
+MouseGetPos, outputX, outputY
+PixelGetColor, var, 474, 174
+MsgBox, X:%outputX% Y:%outputY% color: %var%

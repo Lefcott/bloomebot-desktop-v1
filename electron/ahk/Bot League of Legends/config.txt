@@ -1,0 +1,7 @@
+1366
+768
+"C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=league_of_legends --launch-patchline=live
+BloomeYT
+KotonohaKatsura99
+Soraka
+1024x576

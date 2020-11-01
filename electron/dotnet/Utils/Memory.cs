@@ -1,25 +1,62 @@
 using System;
+using System.Text;
+using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace Listener.Utils
 {
     public class Memory
     {
-        public static void Write(string processName, int address, byte[] bytes)
+        public static void Write(Process process, IntPtr address, byte[] bytes)
         {
-            var processes = Process.GetProcessesByName(processName);
-            if (processes.Length == 0) return;
-            var process = processes[0];
             var hProc = OpenProcess(ProcessAccessFlags.All, false, (int)process.Id);
 
             int wtf = 0;
-            WriteProcessMemory(hProc, new IntPtr(address), bytes, (UInt32)bytes.LongLength, out wtf);
+            WriteProcessMemory(hProc, address, bytes, (UInt32)bytes.LongLength, out wtf);
 
             CloseHandle(hProc);
         }
+        public static Process[] GetProcesses(string name)
+        {
+            return Process.GetProcessesByName(name);
+        }
+        public static IntPtr GetModuleAddress(Process process, string moduleName)
+        {
+            IntPtr moduleAddress = new IntPtr();
+            bool found = false;
+            var modules = process.Modules;
+            foreach (ProcessModule module in modules)
+            {
+
+                if (module.ModuleName == moduleName)
+                {
+                    moduleAddress = module.BaseAddress;
+                    Console.WriteLine($"Found Module: {module.ModuleName} with address {moduleAddress}");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) Console.WriteLine($"Address not found for module '{moduleName}' (Process '{process.ProcessName}' has {process.Modules.Count})");
+            return moduleAddress;
+        }
+        public static IntPtr GetPointer(VAMemory memory, int initialAddress, int[] offsets)
+        {
+            int currentValue = initialAddress;
+            IntPtr currentPointer = (IntPtr)initialAddress;
+            for (int i = 0; i < offsets.Length; i += 1)
+            {
+                int offset = offsets[i];
+                currentPointer = (IntPtr)currentValue + offset;
+                currentValue = memory.ReadInt32(currentPointer);
+            }
+            return currentPointer;
+        }
         [DllImport("kernel32.dll")]
         static extern IntPtr OpenProcess(ProcessAccessFlags dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int dwProcessId);
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetModuleHandle(string lpModuleName);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out int lpNumberOfBytesWritten);

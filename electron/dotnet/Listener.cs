@@ -49,7 +49,8 @@ namespace Listener
 
             if (Message.Length == 0) return new Event() { empty = true };
 
-            return JsonSerializer.Deserialize<Event>(new ASCIIEncoding().GetString(Message));
+            string jsonString = new ASCIIEncoding().GetString(Message);
+            return JsonSerializer.Deserialize<Event>(jsonString);
         }
     }
     public class Event

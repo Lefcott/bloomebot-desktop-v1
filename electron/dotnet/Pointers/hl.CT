@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"pointerscan result"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"hw.dll"+007BBD9C</Address>
+      <Offsets>
+        <Offset>1CC</Offset>
+        <Offset>7C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"pointerscan result"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"hl.exe"+0000138C</Address>
+      <Offsets>
+        <Offset>1CC</Offset>
+        <Offset>320</Offset>
+        <Offset>4</Offset>
+        <Offset>7C</Offset>
+        <Offset>21C</Offset>
+        <Offset>4B8</Offset>
+        <Offset>430</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"pointerscan result"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"hl.exe"+0000138C</Address>
+      <Offsets>
+        <Offset>1CC</Offset>
+        <Offset>320</Offset>
+        <Offset>4</Offset>
+        <Offset>7C</Offset>
+        <Offset>21C</Offset>
+        <Offset>4B8</Offset>
+        <Offset>430</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
