@@ -1,11 +1,9 @@
 using System;
-using System.Threading.Tasks;
 
 namespace Listener.Events.CS1_6
 {
     public class InfiniteMoney
     {
-
         static bool activated = false;
         public static void Activate()
         {
