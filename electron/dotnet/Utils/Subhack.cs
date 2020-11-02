@@ -18,21 +18,26 @@ namespace Listener.Utils
     public ValueTypes valueType { get; set; }
     public int[] moduleBaseAddresses { get; set; }
     public int[] offsets { get; set; }
+    public Func<dynamic, bool> executeWhen { get; set; }
     public dynamic newValue { get; set; }
 
-    private void WriteValue(VAMemory memory, IntPtr pointer)
+    private bool WriteValue(VAMemory memory, IntPtr pointer)
     {
       Type type = newValue.GetType();
-      if (type.Equals(typeof(int)))
-      {
-        memory.WriteInteger(pointer, newValue);
-        return;
-      }
-      if (type.Equals(typeof(float)))
-      {
-        memory.WriteFloat(pointer, newValue);
-        return;
-      }
+      if (type.Equals(typeof(int))) return memory.WriteInteger(pointer, newValue);
+      if (type.Equals(typeof(float))) return memory.WriteFloat(pointer, newValue);
+      return false;
+    }
+    private dynamic GetValue(VAMemory memory, IntPtr pointer)
+    {
+      Type type = newValue.GetType();
+      if (type.Equals(typeof(int))) return memory.ReadInt32(pointer);
+      if (type.Equals(typeof(float))) return memory.ReadFloat(pointer);
+      return false;
+    }
+    private bool HasToExecute(dynamic value)
+    {
+      return executeWhen == null || executeWhen(value);
     }
     public void Execute()
     {
@@ -46,8 +51,13 @@ namespace Listener.Utils
       Utils.Memory.OpenProcess(Utils.Memory.ProcessAccessFlags.All, false, (int)process.Id);
       VAMemory memory = new VAMemory(processName);
       IntPtr moduleAddress = Utils.Memory.GetModuleAddress(process, moduleName);
+      if (moduleAddress == IntPtr.Zero)
+      {
+        Console.WriteLine($"Module {moduleName} for process with name {processName} not found");
+        return;
+      }
 
-      int currentValue;
+      dynamic currentValue;
       foreach (int moduleBaseAddress in moduleBaseAddresses)
       {
         switch (accessType)
@@ -55,13 +65,15 @@ namespace Listener.Utils
           case AccessTypes.POINTER:
             int baseAddress = memory.ReadInt32(moduleAddress + moduleBaseAddress);
             IntPtr pointer = Utils.Memory.GetPointer(memory, baseAddress, offsets);
-            currentValue = memory.ReadInt32(pointer);
+            currentValue = GetValue(memory, pointer);
+            if (!HasToExecute(currentValue)) return;
 
             // Console.WriteLine($"Current {name}: {currentValue}, on {moduleName}");
             WriteValue(memory, pointer);
             break;
           case AccessTypes.ADDRESS:
-            currentValue = memory.ReadInt32(moduleAddress + moduleBaseAddress);
+            currentValue = GetValue(memory, moduleAddress + moduleBaseAddress);
+            if (!HasToExecute(currentValue)) return;
 
             // Console.WriteLine($"Current {name}: {currentValue}, on {moduleName}");
             WriteValue(memory, moduleAddress + moduleBaseAddress);
@@ -74,11 +86,8 @@ namespace Listener.Utils
   {
     public static async Task Execute(Subhack[] subhacks)
     {
-      foreach (var subhack in subhacks)
-      {
-        subhack.Execute();
-      }
-      await Task.Delay(1);
+      foreach (var subhack in subhacks) subhack.Execute();
+      await Task.Delay(100);
     }
   }
 }
