@@ -10,7 +10,8 @@ namespace Listener.Events.CS1_6
       Subhacks.Money.UIValue,
       Subhacks.Life.RealValue,
       Subhacks.Life.UIValue,
-      Subhacks.Granades.Value
+      Subhacks.Granades.Value,
+      Subhacks.Ammo.AmmoValue
     };
   }
 }

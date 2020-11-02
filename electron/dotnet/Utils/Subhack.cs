@@ -51,11 +51,7 @@ namespace Listener.Utils
       Utils.Memory.OpenProcess(Utils.Memory.ProcessAccessFlags.All, false, (int)process.Id);
       VAMemory memory = new VAMemory(processName);
       IntPtr moduleAddress = Utils.Memory.GetModuleAddress(process, moduleName);
-      if (moduleAddress == IntPtr.Zero)
-      {
-        Console.WriteLine($"Module {moduleName} for process with name {processName} not found");
-        return;
-      }
+      if (moduleAddress == IntPtr.Zero) return;
 
       dynamic currentValue;
       foreach (int moduleBaseAddress in moduleBaseAddresses)
