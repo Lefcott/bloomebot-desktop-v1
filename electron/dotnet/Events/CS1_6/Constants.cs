@@ -12,7 +12,8 @@ namespace Listener.Events.CS1_6
       Subhacks.Life.UIValue,
       Subhacks.HEGranade.Value,
       Subhacks.Ammo.Value,
-      Subhacks.Flashbang.Value
+      Subhacks.Flashbang.Value,
+      Subhacks.SmokeGranade.Value
     };
   }
 }
