@@ -2,9 +2,9 @@ using Listener.Utils;
 
 namespace Listener.Events.CS1_6.Subhacks
 {
-  public class Granades
+  public class HEGranade
   {
-    public static readonly Subhack Value = new Subhack("GranadesValue")
+    public static readonly Subhack Value = new Subhack("HEGranadeCount")
     {
       processName = "hl",
       moduleName = "hw.dll",
@@ -12,7 +12,7 @@ namespace Listener.Events.CS1_6.Subhacks
       moduleBaseAddresses = new int[] { 0x007BBD9C },
       offsets = new int[] { 0xC, 0x4, 0x0, 0x0, 0x74, 0x610 },
       executeWhen = value => value != 0,
-      newValue = 50
+      newValue = 128
     };
   }
 }
