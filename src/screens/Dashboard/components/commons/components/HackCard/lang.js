@@ -1,7 +1,11 @@
+import React from 'react';
+
 import { HACK_CODES } from '../../constants';
+import { splitByNBrs } from '../../../../../../utils/html';
 
 const getHackDuration = (licence, month, months) =>
   `${licence.months} ${licence.months === 1 ? month : months}`;
+
 export default langCode =>
   ({
     es: {
@@ -10,7 +14,14 @@ export default langCode =>
       hackDescriptions: {
         [HACK_CODES.AOE2]: 'Shortcuts para construcción rápida.',
         [HACK_CODES.FNAF2]: 'Animatrones automaticos',
-        [HACK_CODES.CS1_6]: 'Dinero siempre en $16000'
+        [HACK_CODES.CS1_6]: (
+          <div>
+            Valores al máximo:
+            <br />
+            <br />
+            {splitByNBrs(['Dinero: $16000', 'Vida: 100'], 1)}
+          </div>
+        )
       },
       fields: {
         game: 'Juego',
@@ -32,7 +43,14 @@ export default langCode =>
       hackDescriptions: {
         [HACK_CODES.AOE2]: 'Shortcuts for building faster.',
         [HACK_CODES.FNAF2]: 'Automatic animatrons',
-        [HACK_CODES.CS1_6]: 'Always $16000'
+        [HACK_CODES.CS1_6]: (
+          <div>
+            Maximum values:
+            <br />
+            <br />
+            {splitByNBrs(['Money: $16000', 'Life: 100'], 1)}
+          </div>
+        )
       },
       fields: {
         game: 'Game',

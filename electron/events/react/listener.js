@@ -21,7 +21,7 @@ ipcMain.on('turnOn', (event, hackCode) => {
   }
   hotkeysOn[hackCode] = true;
   console.log(`Open hack ${hackCode}`);
-  event.returnValue = console.log('ret val', hotkey.up()) || true;
+  event.returnValue = hotkey.up();
 });
 
 ipcMain.on('turnOff', (event, hackCode) => {

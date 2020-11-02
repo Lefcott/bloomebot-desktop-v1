@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import path from 'path';
 import isDev from 'electron-is-dev';
 import { defineEvents } from './events/react/emitter';
@@ -8,6 +8,7 @@ let mainWindow;
 
 function createWindow() {
   try {
+    Menu.setApplicationMenu(null);
     mainWindow = new BrowserWindow({
       icon: `${__dirname}\\favicon.ico`,
       width: 852,

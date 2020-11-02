@@ -8,6 +8,8 @@
     "source.fixAll.eslint": true,
     "source.fixAll": true
   },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
   "files.associations": {
     "algorithm": "cpp",
     "atomic": "cpp",

@@ -58,7 +58,7 @@ export default function HackCard({ hack, onBuy }) {
           <Typography gutterBottom variant="h6" component="h6" key={0}>
             <div className={classes.secondTitle}>{hack.name}</div>
           </Typography>
-          <Typography variant="caption" color="textSecondary" component="p" key={1}>
+          <Typography variant="caption" color="textSecondary" key={1}>
             {lang.hackDescriptions[hack.code]}
           </Typography>
           {(() => {
