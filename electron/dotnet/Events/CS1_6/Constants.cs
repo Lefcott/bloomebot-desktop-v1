@@ -8,12 +8,18 @@ namespace Listener.Events.CS1_6
     {
       Subhacks.Money.RealValue,
       Subhacks.Money.UIValue,
+      Subhacks.Money.ServerRealValue,
       Subhacks.Life.RealValue,
       Subhacks.Life.UIValue,
+      Subhacks.Life.ServerRealValue,
       Subhacks.HEGranade.Value,
+      Subhacks.HEGranade.ServerValue,
       Subhacks.Ammo.Value,
+      Subhacks.Ammo.ServerValue,
       Subhacks.Flashbang.Value,
-      Subhacks.SmokeGranade.Value
+      Subhacks.Flashbang.ServerValue,
+      Subhacks.SmokeGranade.Value,
+      Subhacks.SmokeGranade.ServerValue
     };
   }
 }

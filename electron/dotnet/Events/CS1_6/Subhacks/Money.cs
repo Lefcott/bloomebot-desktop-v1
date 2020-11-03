@@ -22,5 +22,15 @@ namespace Listener.Events.CS1_6.Subhacks
       offsets = new int[] { },
       newValue = 16000
     };
+    public static readonly Subhack ServerRealValue = new Subhack("MoneyServerRealValue")
+    {
+      processName = "hlds",
+      moduleName = "swds.dll",
+      accessType = Subhack.AccessTypes.POINTER,
+      moduleBaseAddresses = new int[] { 0x0086DC54 },
+      offsets = new int[] { 0x130, 0x6B4, 0x2B4, 0x20C, 0x20C, 0x7C, 0x1CC },
+      newValue = 16000
+    };
+
   }
 }
