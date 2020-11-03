@@ -19,10 +19,10 @@ namespace Listener.Events.CS1_6
       Subhacks.Flashbang.Value,
       Subhacks.Flashbang.ServerValue,
       Subhacks.SmokeGranade.Value,
-      Subhacks.SmokeGranade.ServerValue,
+      Subhacks.SmokeGranade.ServerValue
       // Subhacks.Coordinates.XServerRealValue,
       // Subhacks.Coordinates.YServerRealValue,
-      Subhacks.Coordinates.ZServerRealValue
+      // Subhacks.Coordinates.ZServerRealValue
     };
   }
 }

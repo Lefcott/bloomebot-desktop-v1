@@ -39,17 +39,17 @@ namespace Listener.Utils
     }
     private bool HasToExecute(dynamic value)
     {
-      if (changeMultiplier != null)
-      {
-        if (lastValue == null)
-        {
-          lastValue = value;
-          return false;
-        }
-        newValue = lastValue + (value - lastValue) * changeMultiplier;
-        Console.WriteLine($"V: {lastValue}, {value}, {newValue}");
-        lastValue = newValue;
-      }
+      // if (changeMultiplier != null)
+      // {
+      //   if (lastValue == null)
+      //   {
+      //     lastValue = value;
+      //     return false;
+      //   }
+      //   newValue = lastValue + (value - lastValue) * changeMultiplier;
+      //   Console.WriteLine($"V: {lastValue}, {value}, {newValue}");
+      //   lastValue = newValue;
+      // }
 
       return executeWhen == null || executeWhen(value);
     }
@@ -96,7 +96,9 @@ namespace Listener.Utils
   {
     public static async Task Execute(Subhack[] subhacks)
     {
-      foreach (var subhack in subhacks) subhack.Execute();
+      foreach (var subhack in subhacks) {
+        subhack.Execute();
+      }
       await Task.Delay(20);
     }
   }
