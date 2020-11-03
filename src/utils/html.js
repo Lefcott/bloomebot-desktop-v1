@@ -14,7 +14,11 @@ export const splitByNBrs = (texts, brCount) => (
     {texts.map((text, i) => (
       <div key={i}>
         {text}
-        {i < texts.length - 1 ? Array(brCount).map(() => <br />) : ''}
+        {i < texts.length - 1
+          ? Array(brCount)
+              .fill(null)
+              .map((_, ii) => <br key={ii} />)
+          : ''}
       </div>
     ))}
   </div>
