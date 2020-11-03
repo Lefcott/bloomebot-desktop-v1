@@ -20,6 +20,8 @@ namespace Listener.Utils
     public int[] offsets { get; set; }
     public Func<dynamic, bool> executeWhen { get; set; }
     public dynamic newValue { get; set; }
+    public float? changeMultiplier { get; set; }
+    public dynamic lastValue { get; set; }
 
     private bool WriteValue(VAMemory memory, IntPtr pointer)
     {
@@ -37,6 +39,18 @@ namespace Listener.Utils
     }
     private bool HasToExecute(dynamic value)
     {
+      if (changeMultiplier != null)
+      {
+        if (lastValue == null)
+        {
+          lastValue = value;
+          return false;
+        }
+        newValue = lastValue + (value - lastValue) * changeMultiplier;
+        Console.WriteLine($"V: {lastValue}, {value}, {newValue}");
+        lastValue = newValue;
+      }
+
       return executeWhen == null || executeWhen(value);
     }
     public void Execute()
@@ -83,7 +97,7 @@ namespace Listener.Utils
     public static async Task Execute(Subhack[] subhacks)
     {
       foreach (var subhack in subhacks) subhack.Execute();
-      await Task.Delay(100);
+      await Task.Delay(20);
     }
   }
 }
