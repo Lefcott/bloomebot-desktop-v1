@@ -29,3 +29,5 @@ bloomebot-desktop*
 /electron/dotnet/bin
 /electron/dotnet/obj
 /electron/dotnet/keep.cs
+/electron/public/dotnet/bin/Debug/netcoreapp3.1/publish/**
+!/electron/public/dotnet/bin/Debug/netcoreapp3.1/publish/.keep

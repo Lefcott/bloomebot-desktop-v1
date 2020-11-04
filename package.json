@@ -27,7 +27,7 @@
     "electron": "cd electron && electron .",
     "start": "react-scripts start",
     "react-build": "react-scripts build",
-    "build": "npm run react-build && move build \"electron/build\"",
+    "build": "npm run react-build",
     "compile-win": "cd electron && npm run compile-win",
     "install": "cd electron && npm install",
     "babel-node": "babel-node",

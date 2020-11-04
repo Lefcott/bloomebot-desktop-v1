@@ -8,21 +8,21 @@ let mainWindow;
 
 function createWindow() {
   try {
-    Menu.setApplicationMenu(null);
+    // Menu.setApplicationMenu(null);
     mainWindow = new BrowserWindow({
       icon: `${__dirname}\\favicon.ico`,
       width: 852,
       height: 480,
       center: true,
       hasShadow: true,
-      webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js`, devTools: isDev }
+      webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js`, devTools: isDev || true }
     });
   } catch (e) {
     console.error(e);
   }
   defineEvents(mainWindow.webContents);
   mainWindow.loadURL(
-    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, './build/index.html')}`
+    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`
   );
   if (isDev) mainWindow.webContents.openDevTools();
   mainWindow.on('closed', () => (mainWindow = null));

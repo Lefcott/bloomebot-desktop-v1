@@ -2,7 +2,7 @@
   "name": "bloomebot-desktop",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lefcott/bloomebot-desktop-v1.git"
@@ -17,7 +17,9 @@
   "scripts": {
     "electron": "nodemon --watch . --exec electron .",
     "compile-win-old": "electron-packager . bloomebot-desktop --platform=win32 --arch=x64 --out-dir build/electron --prune --overwrite",
-    "compile-win": "cd dotnet && dotnet publish && cd .. && electron-builder",
+    "compile-dotnet": "dotnet publish dotnet --output dist/win-unpacked/resources/dotnet",
+    "move-react-build": "move ../build dist/win-unpacked/resources/build",
+    "compile-win": "electron-builder && npm run compile-dotnet && npm run move-react-build",
     "robotjs-rebuild": "npm rebuild --runtime=electron --target=9.3.2 --disturl=https://atom.io/download/atom-shell --abi=59"
   },
   "eslintConfig": {
@@ -64,8 +66,6 @@
   },
   "build": {
     "appId": "bloomebot-desktop",
-    "files": [
-      "dotnet/bin/Debug/netcoreapp3.1/publish/dotnet.exe"
-    ]
+    "icon": "favicon.ico"
   }
 }
