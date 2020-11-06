@@ -1,6 +1,6 @@
 {
   "name": "bloomebot-desktop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "main": "./index.js",
   "repository": {
@@ -17,9 +17,9 @@
   "scripts": {
     "electron": "nodemon --watch . --exec electron .",
     "compile-win-old": "electron-packager . bloomebot-desktop --platform=win32 --arch=x64 --out-dir build/electron --prune --overwrite",
-    "compile-dotnet": "dotnet publish dotnet --output dist/win-unpacked/resources/dotnet",
+    "compile-dotnet": "dotnet publish dotnet --output dotnet_build",
     "move-react-build": "move ../build dist/win-unpacked/resources/build",
-    "compile-win": "electron-builder && npm run compile-dotnet && npm run move-react-build",
+    "compile-win": "npm run move-react-build && npm run compile-dotnet electron-builder",
     "robotjs-rebuild": "npm rebuild --runtime=electron --target=9.3.2 --disturl=https://atom.io/download/atom-shell --abi=59"
   },
   "eslintConfig": {
