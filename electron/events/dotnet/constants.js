@@ -7,6 +7,6 @@ export const EXE_PATH = path.join(
   __dirname,
   isDev
     ? '../../dotnet/bin/Debug/netcoreapp3.1/publish/dotnet.exe'
-    : '../../../dotnet_build/dotnet.exe'
+    : '../../dotnet_build/dotnet.exe'
 );
 export const KEEP_PATH = path.join(__dirname, '../../dotnet/keep.cs');
