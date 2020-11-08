@@ -29,6 +29,7 @@
     "react-build": "react-scripts build",
     "build": "npm run react-build",
     "compile-win": "cd electron && npm run compile-win",
+    "deploy": "cd electron && npm run deploy",
     "install": "cd electron && npm install",
     "babel-node": "babel-node",
     "electron-rebuild": "$(npm bin)/electron-rebuild",
