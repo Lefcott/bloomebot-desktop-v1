@@ -3,6 +3,7 @@ import path from 'path';
 import isDev from 'electron-is-dev';
 import { defineEvents } from './events/react/emitter';
 import './events';
+import { startUpdater } from './updater';
 
 let mainWindow;
 
@@ -17,6 +18,7 @@ function createWindow() {
       hasShadow: true,
       webPreferences: { nodeIntegration: true, preload: `${__dirname}/preload.js`, devTools: isDev || true }
     });
+    startUpdater(mainWindow);
   } catch (e) {
     console.error(e);
   }

@@ -7,6 +7,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
 import Routes from './routes';
+import Updater from './components/Updater';
 import Theme from './theme';
 
 const root = document.getElementById('root');
@@ -19,6 +20,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={Theme}>
       <Routes />
+      <Updater />
     </ThemeProvider>
   </Provider>,
   root

@@ -1,4 +1,4 @@
-import { ipcRenderer } from './ipcRenderer';
+import { ipcRenderer } from '../ipcRenderer';
 
 ipcRenderer.on('playSound', (event, path) => {
   new Audio(path).play();

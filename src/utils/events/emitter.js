@@ -11,3 +11,4 @@ export const rollbar = {
   error: (...args) => sendEvent('rollbar', 'error', ...args),
   critical: (...args) => sendEvent('rollbar', 'critical', ...args)
 };
+export const closeAndInstallUpdate = () => sendEvent('closeAndInstallUpdate');

@@ -1,4 +1,5 @@
 import isDev from 'electron-is-dev';
+import { autoUpdater } from 'electron-updater';
 
 import * as env from '../../env';
 import rollbar from '../../utils/rollbar';
@@ -45,3 +46,7 @@ ipcMain.on('getHotkeysOn', event => (event.returnValue = Object.keys(hotkeysOn))
 ipcMain.on('getIsDev', event => (event.returnValue = isDev));
 ipcMain.on('getEnv', event => (event.returnValue = JSON.stringify(env)));
 ipcMain.on('rollbar', (event, level, ...args) => (event.returnValue = true) && rollbar[level](...args));
+ipcMain.on('closeAndInstallUpdate', event => {
+  autoUpdater.quitAndInstall(false, true);
+  event.returnValue = true;
+});
