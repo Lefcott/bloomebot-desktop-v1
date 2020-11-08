@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Card, CardContent, CardMedia, Snackbar, Typography } from '@material-ui/core';
+import { Button, Card, FormControl, Snackbar, TextField, Typography } from '@material-ui/core';
+import { CardContent, CardMedia } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 
 import { getOpenHacks, turnOn, turnOff } from '../../../../../../utils/events';
 import { HACK_DATA } from './constants';
 import useStyle from './style';
 import getLang from './lang';
-import { Alert } from '@material-ui/lab';
+import { getLicencePrice } from './utils';
 
 export default function HackCard({ hack, onBuy }) {
   const classes = useStyle();
   const lang = getLang(useSelector(({ language }) => language));
   const user = useSelector(store => store.user);
   const [error, setError] = useState(null);
+  const [sessions, setSessions] = useState(1);
   const [openHacks, setOpenHacks] = useState(getOpenHacks());
   const hackIsOpen = openHacks.includes(hack.code);
 
@@ -36,6 +39,7 @@ export default function HackCard({ hack, onBuy }) {
     setError(null);
     setOpenHacks(getOpenHacks());
   };
+
   return (
     <div>
       {error && (
@@ -81,11 +85,31 @@ export default function HackCard({ hack, onBuy }) {
                 </Button>
               </div>
             );
-            const buyButtons = hack.licences.map((licence, _licenceID) => (
-              <Button className={classes.button} onClick={() => onBuy(_licenceID)} key={_licenceID}>
-                {lang.hackButtonText(licence)}, {hack.licences[_licenceID].price} USD
-              </Button>
-            ));
+            const buyButtons = (
+              <div>
+                <FormControl>
+                  <TextField
+                    className={classes.sessionsInput}
+                    value={sessions}
+                    id="outlined-error-helper-text"
+                    label={lang.fields.sessions}
+                    type="number"
+                    InputProps={{ inputProps: { min: 1, max: 50 } }}
+                    variant="outlined"
+                    onChange={({ target }) => setSessions(target.value)}
+                  />
+                </FormControl>
+                {hack.licences.map((licence, _licenceID) => (
+                  <Button
+                    className={classes.button}
+                    onClick={() => onBuy(_licenceID, sessions)}
+                    key={_licenceID}
+                  >
+                    {lang.hackButtonText(licence)}, {getLicencePrice(hack.licences[_licenceID], sessions)} USD
+                  </Button>
+                ))}
+              </div>
+            );
             return (
               <Typography gutterBottom variant="h5" component="h2">
                 {userHack ? actionButtons : buyButtons}

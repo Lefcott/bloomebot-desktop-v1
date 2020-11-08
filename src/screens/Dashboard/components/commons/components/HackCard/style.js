@@ -37,5 +37,8 @@ export default makeStyles({
     width: '90%',
     fontSize: 8,
     padding: 5
+  },
+  sessionsInput: {
+    marginTop: 10
   }
 });

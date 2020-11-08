@@ -27,6 +27,7 @@ export default langCode =>
       fields: {
         game: 'Juego',
         description: 'Descripción',
+        sessions: 'Sesiones',
         price: 'Precio',
         duration: 'Duración'
       },
@@ -57,6 +58,7 @@ export default langCode =>
       fields: {
         game: 'Game',
         description: 'Description',
+        sessions: 'Sessions',
         price: 'Price',
         duration: 'Duration'
       },

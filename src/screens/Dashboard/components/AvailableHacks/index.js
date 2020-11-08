@@ -21,6 +21,7 @@ export default function Panel() {
   const [licenceID, setLicenceID] = useState(null);
   const [hackError, setHackError] = useState(false);
   const [waiting, setWaiting] = useState(true);
+  const [sessions, setSessions] = useState(1);
 
   useEffect(() => {
     let mounted = true;
@@ -36,9 +37,10 @@ export default function Panel() {
     };
   }, [dispatch]);
 
-  const handleBuy = (hack, _licenceID) => {
+  const handleBuy = (hack, _licenceID, _sessions) => {
     setSelectedHack(hack);
     setLicenceID(_licenceID);
+    setSessions(_sessions);
   };
   return (
     <div className={classes.root}>
@@ -52,12 +54,16 @@ export default function Panel() {
         </Snackbar>
       )}
       {Object.entries(hacks).map(([, hack], i) => (
-        <HackCard hack={hack} onBuy={_licenceID => handleBuy(hack, _licenceID)} key={i + 2} />
+        <HackCard
+          hack={hack}
+          onBuy={(_licenceID, _sessions) => handleBuy(hack, _licenceID, _sessions)}
+          key={i + 2}
+        />
       ))}
       {selectedHack && (
         <BuyModal
           onClose={() => setSelectedHack(null)}
-          getOrder={platform => getHackOrder(platform, selectedHack, licenceID)}
+          getOrder={platform => getHackOrder(platform, selectedHack, licenceID, sessions)}
           hack={selectedHack}
           data={{
             [lang.fields.game]: selectedHack.name,
